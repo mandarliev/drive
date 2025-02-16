@@ -4,6 +4,7 @@ import {
   singlestoreTable,
   index,
   singlestoreTableCreator,
+  bigint,
 } from "drizzle-orm/singlestore-core";
 
 export const createTable = singlestoreTableCreator((name) => `drive_${name}`);
@@ -11,11 +12,14 @@ export const createTable = singlestoreTableCreator((name) => `drive_${name}`);
 export const files = createTable(
   "files_table",
   {
-    id: text("id").primaryKey(),
+    id: bigint("id", { mode: "number", unsigned: true })
+      .primaryKey()
+      .autoincrement(),
+    ownerId: text("owner_id").notNull(),
     name: text("name").notNull(),
     size: int("size").notNull(),
     url: text("url").notNull(),
-    parent: int("parent").notNull(),
+    parent: bigint("parent", { mode: "number", unsigned: true }).notNull(),
   },
   (t) => {
     return [index("parent_index").on(t.parent)];
@@ -25,9 +29,12 @@ export const files = createTable(
 export const folders = createTable(
   "folders_table",
   {
-    id: text("id").primaryKey(),
+    id: bigint("id", { mode: "number", unsigned: true })
+      .primaryKey()
+      .autoincrement(),
+    ownerId: text("owner_id").notNull(),
     name: text("name").notNull(),
-    parent: int("parent"),
+    parent: bigint("parent", { mode: "number", unsigned: true }),
   },
   (t) => {
     return [index("parent_index").on(t.parent)];
