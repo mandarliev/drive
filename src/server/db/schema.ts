@@ -3,9 +3,12 @@ import {
   text,
   singlestoreTable,
   index,
+  singlestoreTableCreator,
 } from "drizzle-orm/singlestore-core";
 
-export const files = singlestoreTable(
+export const createTable = singlestoreTableCreator((name) => `drive_${name}`);
+
+export const files = createTable(
   "files_table",
   {
     id: text("id").primaryKey(),
@@ -19,7 +22,7 @@ export const files = singlestoreTable(
   },
 );
 
-export const folders = singlestoreTable(
+export const folders = createTable(
   "folders_table",
   {
     id: text("id").primaryKey(),
