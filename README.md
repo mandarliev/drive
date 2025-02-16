@@ -7,4 +7,5 @@
 - [ ] Add auth
 - [ ] Add file uploading
 
-### 1:02: 07
+1:13:12
+failed build
