@@ -7,3 +7,5 @@
 - [ ] Add auth
 - [ ] Add file uploading
 - [ ] Add analytics
+
+1:31:28
